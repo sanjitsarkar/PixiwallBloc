@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "751295478722",
+    "firebase_url": "https://pixiwall-91917.firebaseio.com",
+    "project_id": "pixiwall-91917",
+    "storage_bucket": "pixiwall-91917.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751295478722:android:0d597207d4fec3e1be345b",
+        "android_client_info": {
+          "package_name": "com.pixigen.pixiwall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "751295478722-qecg3q439qhcfvg3qhniuj9fn45b8buv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pixigen.pixiwall",
+            "certificate_hash": "7002d8ef5d9b97f8719446ce506bd422e1fb7ff4"
+          }
+        },
+        {
+          "client_id": "751295478722-036pjp1ku8grf4uc3atmtldfumn6n3os.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA20LceOi7TviU79WdIZ79w5gzt66zyqIA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "751295478722-036pjp1ku8grf4uc3atmtldfumn6n3os.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
