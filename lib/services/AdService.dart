@@ -17,26 +17,26 @@ class Ads {
     nonPersonalizedAds: true,
   );
 
-  static BannerAd _createBannerAd() {
-    return BannerAd(
-      adUnitId: BannerAd.testAdUnitId,
-      size: AdSize.banner,
-      targetingInfo: targetingInfo,
-      listener: (MobileAdEvent event) {
-        print("BannerAd event $event");
-      },
-    );
-  }
+  // static BannerAd _createBannerAd() {
+  //   return BannerAd(
+  //     adUnitId: BannerAd.testAdUnitId,
+  //     size: AdSize.banner,
+  //     targetingInfo: targetingInfo,
+  //     listener: (MobileAdEvent event) {
+  //       print("BannerAd event $event");
+  //     },
+  //   );
+  // }
 
-  static void showBannerAd() {
-    if (_bannerAd == null) _bannerAd = _createBannerAd();
-    _bannerAd
-      ..load()
-      ..show(anchorOffset: 0.0, anchorType: AnchorType.bottom);
-  }
+  // static void showBannerAd() {
+  //   if (_bannerAd == null) _bannerAd = _createBannerAd();
+  //   _bannerAd
+  //     ..load()
+  //     ..show(anchorOffset: 0.0, anchorType: AnchorType.bottom);
+  // }
 
-  static void hideBannerAd() async {
-    await _bannerAd.dispose();
-    _bannerAd = null;
-  }
+  // static void hideBannerAd() async {
+  //   await _bannerAd.dispose();
+  //   _bannerAd = null;
+  // }
 }

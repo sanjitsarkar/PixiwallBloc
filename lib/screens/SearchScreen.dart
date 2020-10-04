@@ -72,11 +72,9 @@ print(search);
                listener: (context, state) {
                  // TODO: implement listener
                },
-               child: SingleChildScrollView(
-
-                              child: Column(
-crossAxisAlignment: CrossAxisAlignment.start,
-mainAxisAlignment: MainAxisAlignment.center,
+               child: ListView(
+// crossAxisAlignment: CrossAxisAlignment.start,
+// mainAxisAlignment: MainAxisAlignment.center,
                      children: <Widget>[
                       
                     //  SizedBox(height:30),
@@ -87,7 +85,7 @@ mainAxisAlignment: MainAxisAlignment.center,
                          builder: (context, state) {
 
 
-                                                bool _onScrollNotificationWallpaper(BuildContext context,ScrollNotification notif,WallpaperLoaded state)
+                                 bool _onScrollNotificationWallpaper(BuildContext context,ScrollNotification notif,WallpaperLoaded state)
 {
   if(notif is ScrollEndNotification && _scrollController.position.extentAfter == 0)
   {
@@ -178,11 +176,20 @@ void maxColumn() {
      
  if(state is WallpaperLoading)
   {
-return Center(
-  child:SpinKitChasingDots(
-        color:Colors.white,
-        size:50.0,
-      ),
+return Container(
+  width:w(context),
+  height:h(context),
+  child:   Center(
+  
+    child:SpinKitChasingDots(
+  
+          color:Colors.white,
+  
+          size:50.0,
+  
+        ),
+  
+  ),
 );
   }
 
@@ -255,45 +262,45 @@ return RefreshIndicator(
                              itemCount: state.wallpapers.length,
                              physics: ClampingScrollPhysics(),
                              gridDelegate:
-                                 SliverGridDelegateWithFixedCrossAxisCount(
-                                     crossAxisCount: 2,
-                                     crossAxisSpacing: 2,
-                                     mainAxisSpacing: 2,
-                                     
-                                     childAspectRatio: 2 / 3
+                  SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 2,
+                      mainAxisSpacing: 2,
+                      
+                      childAspectRatio: 2 / 3
 
-                                     ),
+                      ),
                              itemBuilder: (BuildContext context, int i) {
-                               return GestureDetector(
-                                   // autofocus: false,
-                                   onTap: () {
-                                     Navigator.push(
-                                         context,
-                                         MaterialPageRoute(
-                                             builder: (context) =>
-                                                 FullView(
-                                                     img: ImageModel(
-                                                   imgUrl:
-                                                       state.wallpapers[i].imgUrl,
-                                                   title:
-                                                       state.wallpapers[i].title,
-                                                   author:
-                                                       state.wallpapers[i].author,
-                                                   id: state.wallpapers[i].id,
-                                                   category:
-                                                       state.wallpapers[i].category,
-                                                   downloads: 
-                                                       state.wallpapers[i].downloads,
-                                                       isPremium:state.wallpapers[i].isPremium,
-                                                       pixipoints: state.wallpapers[i].pixipoints
-                                                 ))));
-                                   },
-                                   child: wallPapercardNew(
-                                       imgUrl: state.wallpapers[i].imgUrl,
-                                       grad: grad1,
-                                       title: state.wallpapers[i].title,
-                                       context: context,
-                                       id: state.wallpapers[i].id));
+                return GestureDetector(
+                    // autofocus: false,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  FullView(
+                                      img: ImageModel(
+                                    imgUrl:
+                                        state.wallpapers[i].imgUrl,
+                                    title:
+                                        state.wallpapers[i].title,
+                                    author:
+                                        state.wallpapers[i].author,
+                                    id: state.wallpapers[i].id,
+                                    category:
+                                        state.wallpapers[i].category,
+                                    downloads: 
+                                        state.wallpapers[i].downloads,
+                                        isPremium:state.wallpapers[i].isPremium,
+                                        pixipoints: state.wallpapers[i].pixipoints
+                                  ))));
+                    },
+                    child: wallPapercardNew(
+                        imgUrl: state.wallpapers[i].imgUrl,
+                        grad: grad1,
+                        title: state.wallpapers[i].title,
+                        context: context,
+                        id: state.wallpapers[i].id));
                              },
                            ),
                   ),
@@ -301,7 +308,7 @@ return RefreshIndicator(
           ],
         )),
                    );}
-                               
+                
  
   }
    else if(state is WallpaperError)
@@ -317,8 +324,7 @@ Center(child: Text('${state.error}',style: style1,),)
                          },
                        ),
                      ],
-                   ),
-               )
+                   )
              ),
            ),
     

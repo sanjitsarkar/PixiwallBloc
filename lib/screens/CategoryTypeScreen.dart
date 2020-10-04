@@ -82,10 +82,7 @@ break;
           backgroundColor: Primary,
         
           body: 
-           Container(
-             width: w(context),
-             height: h(context),
-                        child: Column(
+           ListView(
              
                children: <Widget>[
 
@@ -190,11 +187,20 @@ void maxColumn() {
 
         if(state is WallpaperLoading)
   {
-return Center(
-  child:SpinKitChasingDots(
-      color:Colors.white,
-      size:50.0,
-    ),
+return Container(
+  width:w(context),
+  height:h(context),
+  child:   Center(
+  
+    child:SpinKitChasingDots(
+  
+          color:Colors.white,
+  
+          size:50.0,
+  
+        ),
+  
+  ),
 );
   }
 
@@ -235,57 +241,57 @@ RefreshIndicator(
      ),),
                 SizedBox(height:10),
           SingleChildScrollView(
-                        child: Container(
+           child: Container(
        width: w(context),
        height: h(context)/1.27,
        
     
        child: GridView.builder(
-                              controller: _scrollController,
-                              itemCount: state.wallpapers.length,
-                              physics: ClampingScrollPhysics(),
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 2,
-                                      mainAxisSpacing: 2,
-                                      
-                                      childAspectRatio: 2 / 3
+                 controller: _scrollController,
+                 itemCount: state.wallpapers.length,
+                 physics: ClampingScrollPhysics(),
+                 gridDelegate:
+                     SliverGridDelegateWithFixedCrossAxisCount(
+                         crossAxisCount: 2,
+                         crossAxisSpacing: 2,
+                         mainAxisSpacing: 2,
+                         
+                         childAspectRatio: 2 / 3
 
-                                      ),
-                              itemBuilder: (BuildContext context, int i) {
-                                return GestureDetector(
-                                    // autofocus: false,
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  FullView(
-                                                      img: ImageModel(
-                                                    imgUrl:
-                                                        state.wallpapers[i].imgUrl,
-                                                    title:
-                                                        state.wallpapers[i].title,
-                                                    author:
-                                                        state.wallpapers[i].author,
-                                                    id: state.wallpapers[i].id,
-                                                    category:
-                                                        state.wallpapers[i].category,
-                                                    downloads: 
-                                                        state.wallpapers[i].downloads,
-                                                            isPremium:state.wallpapers[i].isPremium,
-                                                            pixipoints: state.wallpapers[i].pixipoints
-                                                  ))));
-                                    },
-                                    child: wallPapercardNew(
-                                        imgUrl: state.wallpapers[i].imgUrl,
-                                        grad: grad1,
-                                        title: state.wallpapers[i].title,
-                                        context: context,
-                                        id: state.wallpapers[i].id));
-                              },
-                            ),
+                         ),
+                 itemBuilder: (BuildContext context, int i) {
+                   return GestureDetector(
+                       // autofocus: false,
+                       onTap: () {
+                         Navigator.push(
+                             context,
+                             MaterialPageRoute(
+                                 builder: (context) =>
+                                     FullView(
+                                         img: ImageModel(
+                                       imgUrl:
+                                           state.wallpapers[i].imgUrl,
+                                       title:
+                                           state.wallpapers[i].title,
+                                       author:
+                                           state.wallpapers[i].author,
+                                       id: state.wallpapers[i].id,
+                                       category:
+                                           state.wallpapers[i].category,
+                                       downloads: 
+                                           state.wallpapers[i].downloads,
+                                               isPremium:state.wallpapers[i].isPremium,
+                                               pixipoints: state.wallpapers[i].pixipoints
+                                     ))));
+                       },
+                       child: wallPapercardNew(
+                           imgUrl: state.wallpapers[i].imgUrl,
+                           grad: grad1,
+                           title: state.wallpapers[i].title,
+                           context: context,
+                           id: state.wallpapers[i].id));
+                 },
+               ),
               ),
           ),
         ],
@@ -311,7 +317,6 @@ Center(child: Text('Error Loading Categories',style: style1,),)
 
 
 ]),
-           ),
 // bottomNavigationBar:  BottomNavigationBar(
 
 //     backgroundColor: Secondary,

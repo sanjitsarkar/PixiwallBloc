@@ -10,9 +10,10 @@ Widget Tags({name,grad,context})
     Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchScreen(src: name,)));
    },
     child: Container(
+      height: 100,
      alignment: Alignment.center,
       margin: EdgeInsets.symmetric(horizontal:10),
-      padding: EdgeInsets.symmetric(horizontal: 20,),
+      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 0),
       decoration: BoxDecoration(
         gradient: grad,
         borderRadius: BorderRadius.circular(30),

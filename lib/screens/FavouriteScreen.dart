@@ -85,10 +85,7 @@ break;
         
         ),
           body: 
-           Container(
-             width: w(context),
-            //  height: h(context),
-                        child: ListView(
+           ListView(
              
                children: <Widget>[
 
@@ -109,11 +106,20 @@ BlocBuilder<FavouriteBloc, FavouriteState>(
 
         if(state is FavouriteLoading)
   {
-return Center(
-  child:SpinKitChasingDots(
-      color:Colors.white,
-      size:50.0,
-    ),
+return Container(
+  width:w(context),
+  height:h(context),
+  child:   Center(
+  
+    child:SpinKitChasingDots(
+  
+          color:Colors.white,
+  
+          size:50.0,
+  
+        ),
+  
+  ),
 );
   }
 
@@ -172,26 +178,26 @@ RefreshIndicator(
                   // autofocus: false,
                   onTap: () {
                     Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  FullView(
-                                      img: ImageModel(
-                                    imgUrl:
-                                        state.fav[i].imgUrl,
-                                    title:
-                                        state.fav[i].title,
-                                    author:
-                                        state.fav[i].author,
-                                    id: state.fav[i].id,
-                                    category:
-                                        state.fav[i].category,
-                                    downloads: 
-                                        state.fav[i].downloads,
-                                        
-                                    isPremium:state.fav[i].isPremium,
-                                    pixipoints: state.fav[i].pixipoints
-                                  ))));
+             context,
+             MaterialPageRoute(
+                 builder: (context) =>
+                     FullView(
+                         img: ImageModel(
+                       imgUrl:
+                           state.fav[i].imgUrl,
+                       title:
+                           state.fav[i].title,
+                       author:
+                           state.fav[i].author,
+                       id: state.fav[i].id,
+                       category:
+                           state.fav[i].category,
+                       downloads: 
+                           state.fav[i].downloads,
+                           
+                       isPremium:state.fav[i].isPremium,
+                       pixipoints: state.fav[i].pixipoints
+                     ))));
                   },
                   child: wallPapercardNew(
                       imgUrl: state.fav[i].imgUrl,
@@ -225,7 +231,6 @@ Center(child: Text('Error Loading Categories',style: style1,),)
 
 
 ]),
-           ),
 bottomNavigationBar:  BottomNavigationBar(
 
     backgroundColor: Secondary,

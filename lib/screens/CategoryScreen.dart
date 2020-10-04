@@ -90,218 +90,224 @@ class _CategoryScreenState extends State<CategoryScreen> {
       child: Scaffold(
         backgroundColor: Primary,
 
-        body: Container(
-            width: w(context),
-            height: h(context),
-            child: Column(children: <Widget>[
-              SizedBox(height: 30),
-              //  TagList(),
-              //  SizedBox(height:30),
-              BlocListener<WallpaperBloc, WallpaperState>(
-                  listener: (context, state) {},
-                  child: BlocBuilder<WallpaperBloc, WallpaperState>(
-                      builder: (context, state) {
-                    bool _onScrollNotificationWallpaper(BuildContext context,
-                        ScrollNotification notif, WallpaperLoaded state) {
-                      if (notif is ScrollEndNotification &&
-                          _scrollController.position.extentAfter == 0) {
-                        print('hello');
-                        context.bloc<WallpaperBloc>().add(LoadMoreWallpapers(
-                            wallpapers: state.wallpapers,
-                            sort: args['type'],
-                            limit: 2));
-                      }
-                      return false;
-                    }
+        body: ListView(children: <Widget>[
+          SizedBox(height: 30),
+          //  TagList(),
+          //  SizedBox(height:30),
+          BlocListener<WallpaperBloc, WallpaperState>(
+              listener: (context, state) {},
+              child: BlocBuilder<WallpaperBloc, WallpaperState>(
+                  builder: (context, state) {
+                bool _onScrollNotificationWallpaper(BuildContext context,
+                    ScrollNotification notif, WallpaperLoaded state) {
+                  if (notif is ScrollEndNotification &&
+                      _scrollController.position.extentAfter == 0) {
+                    print('hello');
+                    context.bloc<WallpaperBloc>().add(LoadMoreWallpapers(
+                        wallpapers: state.wallpapers,
+                        sort: args['type'],
+                        limit: 2));
+                  }
+                  return false;
+                }
 
-                    PopupMenu.context = context;
+                PopupMenu.context = context;
 // final snap.data = Provider.of<List<ImageModel>>(context)??[];
-                    void stateChanged(bool isShow) {
-                      print('menu is ${isShow ? 'showing' : 'closed'}');
-                    }
+                void stateChanged(bool isShow) {
+                  print('menu is ${isShow ? 'showing' : 'closed'}');
+                }
 
-                    void onClickMenu(MenuItemProvider item) {
-                      print('Click menu -> ${item.menuTitle}');
+                void onClickMenu(MenuItemProvider item) {
+                  print('Click menu -> ${item.menuTitle}');
 
-                      if (item.menuTitle == 'Recent') {
-                        setState(() async {
-                          sort = 'Recent';
+                  if (item.menuTitle == 'Recent') {
+                    setState(() async {
+                      sort = 'Recent';
 
-                          context.bloc<WallpaperBloc>()
-                            ..add(RefreshWallpapers(limit: 4, sort: sort));
-                          print(sort);
-                        });
-                      } else if (item.menuTitle == 'Trending') {
-                        setState(() async {
-                          sort = 'Trending';
+                      context.bloc<WallpaperBloc>()
+                        ..add(RefreshWallpapers(limit: 4, sort: sort));
+                      print(sort);
+                    });
+                  } else if (item.menuTitle == 'Trending') {
+                    setState(() async {
+                      sort = 'Trending';
 
-                          context.bloc<WallpaperBloc>()
-                            ..add(RefreshWallpapers(limit: 4, sort: sort));
-                          print(sort);
-                        });
-                      }
-                    }
+                      context.bloc<WallpaperBloc>()
+                        ..add(RefreshWallpapers(limit: 4, sort: sort));
+                      print(sort);
+                    });
+                  }
+                }
 
-                    void onDismiss() {
-                      print('Menu is dismiss');
-                    }
+                void onDismiss() {
+                  print('Menu is dismiss');
+                }
 
-                    void maxColumn() {
-                      PopupMenu menu = PopupMenu(
-                          // backgroundColor: Colors.teal,
-                          // lineColor: Colors.tealAccent,
-                          maxColumn: 2,
-                          backgroundColor: red2,
-                          highlightColor: red1,
-                          lineColor: Colors.white,
-                          items: [
-                            MenuItem(
-                                title: 'Trending',
-                                image: FaIcon(FontAwesomeIcons.fire,
-                                    color: Colors.white)),
+                void maxColumn() {
+                  PopupMenu menu = PopupMenu(
+                      // backgroundColor: Colors.teal,
+                      // lineColor: Colors.tealAccent,
+                      maxColumn: 2,
+                      backgroundColor: red2,
+                      highlightColor: red1,
+                      lineColor: Colors.white,
+                      items: [
+                        MenuItem(
+                            title: 'Trending',
+                            image: FaIcon(FontAwesomeIcons.fire,
+                                color: Colors.white)),
 
-                            // MenuItem(
-                            //     title: 'Home',
-                            //     // textStyle: TextStyle(fontSize: 10.0, color: Colors.tealAccent),
-                            //     image: Icon(
-                            //       Icons.home,
-                            //       color: Colors.white,
-                            //     )),
-                            // MenuItem(
-                            //     title: 'Mail',
-                            //     image: Icon(
-                            //       Icons.mail,
-                            //       color: Colors.white,
-                            //     )),
-                            MenuItem(
-                                title: 'Recent',
-                                image: FaIcon(FontAwesomeIcons.firstOrder,
-                                    color: Colors.white)),
+                        // MenuItem(
+                        //     title: 'Home',
+                        //     // textStyle: TextStyle(fontSize: 10.0, color: Colors.tealAccent),
+                        //     image: Icon(
+                        //       Icons.home,
+                        //       color: Colors.white,
+                        //     )),
+                        // MenuItem(
+                        //     title: 'Mail',
+                        //     image: Icon(
+                        //       Icons.mail,
+                        //       color: Colors.white,
+                        //     )),
+                        MenuItem(
+                            title: 'Recent',
+                            image: FaIcon(FontAwesomeIcons.firstOrder,
+                                color: Colors.white)),
+                      ],
+                      onClickMenu: onClickMenu,
+                      stateChanged: stateChanged,
+                      onDismiss: onDismiss);
+                  menu.show(widgetKey: btnKey);
+                }
+
+                if (state is WallpaperLoading) {
+                  return Container(
+  width:w(context),
+  height:h(context),
+  child:   Center(
+  
+    child:SpinKitChasingDots(
+  
+          color:Colors.white,
+  
+          size:50.0,
+  
+        ),
+  
+  ),
+);
+                } else if (state is WallpaperLoaded) {
+                  return RefreshIndicator(
+                    onRefresh: () async {
+                      setState(() {
+                        context.bloc<WallpaperBloc>()
+                          ..add(RefreshWallpapers(
+                            sort: args['type'],
+                            limit: 5,
+                          ));
+                      });
+                    },
+                    child: NotificationListener<ScrollNotification>(
+                        onNotification: (notification) =>
+                            _onScrollNotificationWallpaper(
+                                context, notification, state),
+                        child: Column(
+                          children: <Widget>[
+                            buildTopBar(context, maxColumn, args['type']),
+                            SizedBox(height: 10),
+                            Container(
+                              height: 35,
+                              width: double.infinity,
+                              child: BlocListener<TagBloc, TagState>(
+                                  listener: (context, state) {},
+                                  child: BlocConsumer<TagBloc, TagState>(
+                                      listener: (context, state) {
+                                    // do stuff here based on BlocA's state
+                                  }, builder: (context, state) {
+                                    return Tag(state);
+                                    // return widget here based on BlocA's state
+                                  })),
+                            ),
+                            SizedBox(height: 10),
+                            SingleChildScrollView(
+                              child: Container(
+                                width: w(context),
+                                height: h(context) / 1.42,
+                                child: GridView.builder(
+                                  controller: _scrollController,
+                                  itemCount: state.wallpapers.length,
+                                  physics: ClampingScrollPhysics(),
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          crossAxisSpacing: 2,
+                                          mainAxisSpacing: 2,
+                                          childAspectRatio: 2 / 3),
+                                  itemBuilder:
+                                      (BuildContext context, int i) {
+                                    return GestureDetector(
+                                        // autofocus: false,
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => FullView(
+                                                      img: ImageModel(
+                                                          imgUrl: state
+                                                              .wallpapers[i]
+                                                              .imgUrl,
+                                                          title: state
+                                                              .wallpapers[i]
+                                                              .title,
+                                                          author: state
+                                                              .wallpapers[i]
+                                                              .author,
+                                                          id: state
+                                                              .wallpapers[i]
+                                                              .id,
+                                                          category: state
+                                                              .wallpapers[i]
+                                                              .category,
+                                                          downloads: state
+                                                              .wallpapers[i]
+                                                              .downloads,
+                                                          isPremium: state
+                                                              .wallpapers[i]
+                                                              .isPremium,
+                                                          pixipoints: state
+                                                              .wallpapers[i]
+                                                              .pixipoints))));
+                                        },
+                                        child: wallPapercardNew(
+                                            imgUrl:
+                                                state.wallpapers[i].imgUrl,
+                                            grad: grad1,
+                                            title:
+                                                state.wallpapers[i].title,
+                                            context: context,
+                                            id: state.wallpapers[i].id));
+                                  },
+                                ),
+                              ),
+                            ),
                           ],
-                          onClickMenu: onClickMenu,
-                          stateChanged: stateChanged,
-                          onDismiss: onDismiss);
-                      menu.show(widgetKey: btnKey);
-                    }
-
-                    if (state is WallpaperLoading) {
-                      return Center(
-                        child: SpinKitChasingDots(
-                          color: Colors.white,
-                          size: 50.0,
-                        ),
-                      );
-                    } else if (state is WallpaperLoaded) {
-                      return RefreshIndicator(
-                        onRefresh: () async {
-                          setState(() {
-                            context.bloc<WallpaperBloc>()
-                              ..add(RefreshWallpapers(
-                                sort: args['type'],
-                                limit: 5,
-                              ));
-                          });
-                        },
-                        child: NotificationListener<ScrollNotification>(
-                            onNotification: (notification) =>
-                                _onScrollNotificationWallpaper(
-                                    context, notification, state),
-                            child: Column(
-                              children: <Widget>[
-                                buildTopBar(context, maxColumn, args['type']),
-                                SizedBox(height: 10),
-                                Container(
-                                  height: 35,
-                                  width: double.infinity,
-                                  child: BlocListener<TagBloc, TagState>(
-                                      listener: (context, state) {},
-                                      child: BlocConsumer<TagBloc, TagState>(
-                                          listener: (context, state) {
-                                        // do stuff here based on BlocA's state
-                                      }, builder: (context, state) {
-                                        return Tag(state);
-                                        // return widget here based on BlocA's state
-                                      })),
-                                ),
-                                SizedBox(height: 10),
-                                SingleChildScrollView(
-                                  child: Container(
-                                    width: w(context),
-                                    height: h(context) / 1.42,
-                                    child: GridView.builder(
-                                      controller: _scrollController,
-                                      itemCount: state.wallpapers.length,
-                                      physics: ClampingScrollPhysics(),
-                                      gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: 2,
-                                              crossAxisSpacing: 2,
-                                              mainAxisSpacing: 2,
-                                              childAspectRatio: 2 / 3),
-                                      itemBuilder:
-                                          (BuildContext context, int i) {
-                                        return GestureDetector(
-                                            // autofocus: false,
-                                            onTap: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) => FullView(
-                                                          img: ImageModel(
-                                                              imgUrl: state
-                                                                  .wallpapers[i]
-                                                                  .imgUrl,
-                                                              title: state
-                                                                  .wallpapers[i]
-                                                                  .title,
-                                                              author: state
-                                                                  .wallpapers[i]
-                                                                  .author,
-                                                              id: state
-                                                                  .wallpapers[i]
-                                                                  .id,
-                                                              category: state
-                                                                  .wallpapers[i]
-                                                                  .category,
-                                                              downloads: state
-                                                                  .wallpapers[i]
-                                                                  .downloads,
-                                                              isPremium: state
-                                                                  .wallpapers[i]
-                                                                  .isPremium,
-                                                              pixipoints: state
-                                                                  .wallpapers[i]
-                                                                  .pixipoints))));
-                                            },
-                                            child: wallPapercardNew(
-                                                imgUrl:
-                                                    state.wallpapers[i].imgUrl,
-                                                grad: grad1,
-                                                title:
-                                                    state.wallpapers[i].title,
-                                                context: context,
-                                                id: state.wallpapers[i].id));
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )),
-                      );
-                    } else if (state is WallpaperError) {
-                      return (Center(
-                        child: Text(
-                          'Error Loading Categories',
-                          style: style1,
-                        ),
-                      ));
-                    } else {
-                      return Container();
-                    }
-                    // return widget here based on BlocA's state
-                  })),
+                        )),
+                  );
+                } else if (state is WallpaperError) {
+                  return (Center(
+                    child: Text(
+                      'Error Loading Categories',
+                      style: style1,
+                    ),
+                  ));
+                } else {
+                  return Container();
+                }
+                // return widget here based on BlocA's state
+              })),
 // SizedBox(height:30),
-            ])),
+        ]),
 // bottomNavigationBar:  BottomNavigationBar(
 
 //     backgroundColor: Secondary,

@@ -59,8 +59,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       initialIndex: 1,
     );
     Ads.initialize();
-    Ads.showBannerAd();
-    Ads.hideBannerAd();
+    // Ads.showBannerAd();
+    // Ads.hideBannerAd();
 
     // db.open();
     // db.inW
@@ -119,7 +119,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     // TODO: implement dispose
     super.dispose();
     tabController.dispose();
-    Ads.hideBannerAd();
+    // Ads.hideBannerAd();
   }
 
   @override

@@ -52,7 +52,7 @@ class _FullViewState extends State<FullView> {
   // AdService adService;
   // dynamic _imageFile;
   RewardedVideoAd rewardedVideoAd;
-  BannerAd footer;
+  // BannerAd footer;
   @override
   void initState() {
     super.initState();
@@ -69,7 +69,7 @@ class _FullViewState extends State<FullView> {
     // adService = AdService();
     // adService.adInitialize();
     Ads.initialize();
-    Ads.showBannerAd();
+    // Ads.showBannerAd();
     // FirebaseAdMob.instance
     //     .initialize(appId: 'ca-app-pub-4593136213044487~8513933899');
     // super.initState();
@@ -217,7 +217,7 @@ class _FullViewState extends State<FullView> {
     // Clean up the controller when the widget is removed from the
     // widget tree.
     // await footer.dispose();
-    Ads.hideBannerAd();
+    // Ads.hideBannerAd();
     super.dispose();
   }
   //  Future<void> _download() async {
